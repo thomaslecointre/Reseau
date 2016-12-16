@@ -49,7 +49,12 @@ public class CommandSession {
 		try {
 			CommandWriter w = new CommandWriter(connection.getOutputStream());
 			CommandReader r = new CommandReader(connection.getInputStream());
-			return false;
+
+			w.createConnect(name);
+			w.send();
+			//...
+			r.receive();
+			return (r.getType() == Protocol.CONNECT_OK) ? true : false;
 		} catch (IOException e) {
 			return false;
 		}
