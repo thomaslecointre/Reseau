@@ -10,4 +10,15 @@ public class CommandWriter extends BasicAbstractWriter {
 		super (outputStream);
 	}
 
+	@Override
+	protected void writeInt(int v) {
+	    super.writeInt(v);
+	}
+
+	@Override
+	public void send() {
+	    // TODO Auto-generated method stub
+	    super.send();
+	}
+
 }
