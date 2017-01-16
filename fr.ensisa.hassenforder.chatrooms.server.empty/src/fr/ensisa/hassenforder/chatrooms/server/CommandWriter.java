@@ -14,10 +14,13 @@ public class CommandWriter extends BasicAbstractWriter {
 	protected void writeInt(int v) {
 	    super.writeInt(v);
 	}
+	@Override
+	protected void writeString(String v) {
+		super.writeString(v);
+	}
 
 	@Override
 	public void send() {
-	    // TODO Auto-generated method stub
 	    super.send();
 	}
 

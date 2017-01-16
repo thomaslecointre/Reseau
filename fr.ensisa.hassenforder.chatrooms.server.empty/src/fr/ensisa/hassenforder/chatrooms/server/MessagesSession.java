@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.List;
 
+import fr.ensisa.hassenforder.chatrooms.server.model.Channel;
 import fr.ensisa.hassenforder.chatrooms.server.model.Message;
 import fr.ensisa.hassenforder.network.Protocol;
 
