@@ -12,11 +12,11 @@ public interface Protocol {
     public static final int CONNECT_KO 			= 02;
     public static final int DISCONNECT 			= 03;
 
-    public static final int CREATE 			= 10;
+    public static final int CREATE 				= 10;
     public static final int CREATE_OK 			= 11;
     public static final int CREATE_KO 			= 12;
 
-    public static final int LOAD 			= 20;
+    public static final int LOAD 				= 20;
     public static final int LOAD_OK 			= 21;
     public static final int LOAD_KO 			= 22;
 
@@ -37,7 +37,7 @@ public interface Protocol {
     public static final int INVALIDATE_KO 		= 54;
     
     // Channel type integers
-    public static final int FREE			= 100;
+    public static final int FREE		      	= 100;
     public static final int MODERATED			= 101;
 
 }
