@@ -21,32 +21,36 @@ public class CommandReader extends BasicAbstractReader {
     }
 
     public void receive() {
-	type = readInt();
-	switch (type) {
-	case Protocol.CONNECT:
-	    this.name = readString();
-	case Protocol.CREATE:
-	    this.channel = readString();
-	    this.channelType = readInt();
-	case Protocol.SUBSCRIBE:
-	    this.name = readString();
-	    this.channel = readString();
-	    this.subscription = true;
-	case Protocol.UNSUBSCRIBE:
-	    this.name = readString();
-	    this.channel = readString();
-	    this.subscription = false;
-	case Protocol.VALIDATE:
-	    this.channel = readString();
-	    this.name = readString();
-	    this.messageId = readInt();
-	    this.approved = true;
-	case Protocol.INVALIDATE:
-	    this.channel = readString();
-	    this.name = readString();
-	    this.messageId = readInt();
-	    this.approved = false;
-	}
+		type = readInt();
+		switch (type) {
+			case Protocol.CONNECT:
+			    this.name = readString();
+			case Protocol.CREATE:
+			    this.channel = readString();
+			    this.channelType = readInt();
+			case Protocol.SUBSCRIBE:
+			    this.name = readString();
+			    this.channel = readString();
+			    this.subscription = true;
+			case Protocol.UNSUBSCRIBE:
+			    this.name = readString();
+			    this.channel = readString();
+			    this.subscription = false;
+			case Protocol.VALIDATE:
+			    this.channel = readString();
+			    this.name = readString();
+			    this.messageId = readInt();
+			    this.approved = true;
+			case Protocol.INVALIDATE:
+			    this.channel = readString();
+			    this.name = readString();
+			    this.messageId = readInt();
+			    this.approved = false;
+			//case Protocol.LOAD:
+			//case Protocal.DISCONNECT:
+			//case Protocol.MODERATED: name; text; approved;
+			//???? case Protocol.FREE: ????
+		}
     }
 
     public String getName() {
