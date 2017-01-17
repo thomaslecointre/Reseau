@@ -6,20 +6,20 @@ import fr.ensisa.hassenforder.network.BasicAbstractReader;
 
 public class MessagesReader extends BasicAbstractReader {
 
-	private String userName;
-	
-	public MessagesReader(InputStream inputStream) {
-		super (inputStream);
-	}
+    private String userName;
 
-	public void receive() {
-		type = readInt ();
-		switch (type) {
-		}
-	}
+    public MessagesReader(InputStream inputStream) {
+	super(inputStream);
+    }
 
-	public String getUserName() {
-		return userName;
+    public void receive() {
+	type = readInt();
+	switch (type) {
 	}
+    }
+
+    public String getUserName() {
+	return userName;
+    }
 
 }

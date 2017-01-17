@@ -3,6 +3,8 @@ package fr.ensisa.hassenforder.chatrooms.server.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.ensisa.hassenforder.network.Protocol;
+
 /**
  *
  * @author Hassenforder
@@ -45,5 +47,9 @@ public class Channel {
 		}
 		return false;
 	}
+	
+	public int getChannelTypeInt() {
+		return type.equals(ChannelType.FREE) ? Protocol.FREE : Protocol.MODERATED;
+	    }
 
 }

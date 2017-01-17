@@ -21,52 +21,57 @@ public class CommandReader extends BasicAbstractReader {
     }
 
     public void receive() {
-		type = readInt();
-		switch (type) {
-			case Protocol.CONNECT:
-			    this.name = readString();
-			case Protocol.CREATE:
-			    this.channel = readString();
-			    this.channelType = readInt();
-			case Protocol.SUBSCRIBE:
-			    this.name = readString();
-			    this.channel = readString();
-			    this.subscription = true;
-			case Protocol.UNSUBSCRIBE:
-			    this.name = readString();
-			    this.channel = readString();
-			    this.subscription = false;
-			case Protocol.VALIDATE:
-			    this.channel = readString();
-			    this.name = readString();
-			    this.messageId = readInt();
-			    this.approved = true;
-			case Protocol.INVALIDATE:
-			    this.channel = readString();
-			    this.name = readString();
-			    this.messageId = readInt();
-			    this.approved = false;
-			//case Protocol.LOAD:
-			//case Protocal.DISCONNECT:
-			//case Protocol.MODERATED: name; text; approved;
-			//???? case Protocol.FREE: ????
-		}
+	type = readInt();
+	switch (type) {
+	case Protocol.CONNECT:
+	    this.name = readString();
+	    break;
+	case Protocol.CREATE:
+	    this.name = readString();
+	    this.channel = readString();
+	    this.channelType = readInt();
+	    break;
+	case Protocol.SUBSCRIBE:
+	    this.name = readString();
+	    this.channel = readString();
+	    this.subscription = true;
+	    break;
+	case Protocol.UNSUBSCRIBE:
+	    this.name = readString();
+	    this.channel = readString();
+	    this.subscription = false;
+	    break;
+	case Protocol.VALIDATE:
+	    this.channel = readString();
+	    this.name = readString();
+	    this.messageId = readInt();
+	    this.approved = true;
+	    break;
+	case Protocol.INVALIDATE:
+	    this.channel = readString();
+	    this.name = readString();
+	    this.messageId = readInt();
+	    this.approved = false;
+	    break;
+	case Protocol.LOAD:
+	    this.name = readString();
+	    break;
+	// case Protocal.DISCONNECT:
+	// case Protocol.MODERATED: name; text; approved;
+	// ???? case Protocol.FREE: ????
+	}
     }
 
     public String getName() {
 	return this.name;
     }
-    
+
     public String getChannel() {
 	return this.channel;
     }
-    
+
     public ChannelType getChannelType() {
-	if(channelType == 100)
-	    return ChannelType.FREE;
-	else if(channelType == 101)
-	    return ChannelType.MODERATED;
-	return null;
+	return channelType == Protocol.FREE ? ChannelType.FREE : ChannelType.MODERATED;
     }
 
     public boolean getSubscription() {
