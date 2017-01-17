@@ -39,7 +39,11 @@ public class CommandSession {
 		try {
 			CommandWriter w = new CommandWriter(connection.getOutputStream());
 			CommandReader r = new CommandReader(connection.getInputStream());
-			return false;
+			w.disconnect(name);
+			w.send();
+			r.receive();
+			return true;
+			//return false;
 		} catch (IOException e) {
 			return false;
 		}
@@ -52,7 +56,6 @@ public class CommandSession {
 
 			w.createConnect(name);
 			w.send();
-			//...
 			r.receive();
 			return (r.getType() == Protocol.CONNECT_OK) ? true : false;
 		} catch (IOException e) {
@@ -64,7 +67,11 @@ public class CommandSession {
 		try {
 			CommandWriter w = new CommandWriter(connection.getOutputStream());
 			CommandReader r = new CommandReader(connection.getInputStream());
-			return false;
+			w.channelCreation(name, channel, type);
+			w.send();
+			r.receive();
+			return (r.getType() == Protocol.CREATE_OK) ? true : false;
+			
 		} catch (IOException e) {
 			return false;
 		}
@@ -74,7 +81,10 @@ public class CommandSession {
 		try {
 			CommandWriter w = new CommandWriter(connection.getOutputStream());
 			CommandReader r = new CommandReader(connection.getInputStream());
-			return null;
+			w.loadAllChannels(name);
+			w.send();
+			r.receive();
+			return (r.getType() == Protocol.LOAD_OK) ? r.getAllChannels() : null;
 		} catch (IOException e) {
 			return null;
 		}
@@ -84,7 +94,11 @@ public class CommandSession {
 		try {
 			CommandWriter w = new CommandWriter(connection.getOutputStream());
 			CommandReader r = new CommandReader(connection.getInputStream());
-			return false;
+			w.channelSubsctiptionChange(name, description, selected);
+			w.send();
+			r.receive();
+			return (r.getType() == Protocol.SUBSCRIBE_OK) ? true : false;
+			
 		} catch (IOException e) {
 			return false;
 		}
@@ -94,7 +108,11 @@ public class CommandSession {
 		try {
 			CommandWriter w = new CommandWriter(connection.getOutputStream());
 			CommandReader r = new CommandReader(connection.getInputStream());
-			return false;
+			w.createModerationState(name, message, approved);
+			w.send();
+			r.receive();
+			return (r.getType() == Protocol.FREE) ? true : false;
+			
 		} catch (IOException e) {
 			return false;
 		}
@@ -104,7 +122,11 @@ public class CommandSession {
 		try {
 			CommandWriter w = new CommandWriter(connection.getOutputStream());
 			CommandReader r = new CommandReader(connection.getInputStream());
-			return false;
+			w.createMessage(name, channelName, text);
+			w.send();
+			r.receive();
+			return (r.getType() == Protocol.NEW_MESSAGE) ? true : false;
+			
 		} catch (IOException e) {
 			return false;
 		}
