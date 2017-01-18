@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.ensisa.hassenforder.chatrooms.client.model.Channel;
+import fr.ensisa.hassenforder.chatrooms.client.model.Model;
 import fr.ensisa.hassenforder.chatrooms.client.model.ChannelType;
 import fr.ensisa.hassenforder.network.BasicAbstractReader;
 import fr.ensisa.hassenforder.network.Protocol;
@@ -19,62 +20,82 @@ public class CommandReader extends BasicAbstractReader {
     private boolean approved;
 
     public CommandReader(InputStream inputStream) {
-	super(inputStream);
+    	super(inputStream);
     }
 
     public void receive() {
-	type = readInt();
-	switch (type) {
-	case Protocol.CONNECT_OK:
-	    // TODO
-	    break;
-	case Protocol.CONNECT_KO:
-	    // TODO
-	    break;
-	case Protocol.CREATE_OK:
-	    // TODO
-	    break;
-	case Protocol.LOAD_OK:
-	    // TODO
-	case Protocol.LOAD_KO:
-	    // TODO
-	}
+		type = readInt();
+		switch (type) {
+			case Protocol.CONNECT_OK:
+			    // TODO
+			    break;
+			case Protocol.CONNECT_KO:
+			    // TODO
+			    break;
+			case Protocol.CREATE_OK:
+			    // TODO
+			    break;
+			case Protocol.LOAD_OK:
+				/*
+			    int size = readInt();
+			    for(int i =0; i < size; i++){
+			    	String channelName = readString();
+			    	int mode = readInt();
+			    	String modoName = readString();
+			    	int subscription = readInt();
+			    	boolean subscriptionBool = (subscription == 0)? true : false; 
+			    	ChannelType modeCT;
+			    	if (mode == 100){
+			    		modeCT = ChannelType.FREE;
+			    		Channel channel = new Channel(channelName, modeCT,modoName, subscriptionBool);
+			    	}else if (mode==101){
+			    		modeCT = ChannelType.MODERATED;
+			    		Channel channel = new Channel(channelName, modeCT,modoName, subscriptionBool);
+			    	}
+			    }
+			    */
+			    break;
+			case Protocol.LOAD_KO:
+			    // TODO
+			}
     }
 
     public String getName() {
-	return this.name;
+    	return this.name;
     }
 
     public String getChannel() {
-	return this.channel;
+    	return this.channel;
     }
 
     public boolean getSubscription() {
-	return this.subscription;
+    	return this.subscription;
     }
 
     public int getMessageId() {
-	return this.messageId;
+    	return this.messageId;
     }
 
     public boolean getApproved() {
-	return this.approved;
+    	return this.approved;
     }
 
     public ChannelType getChannelType() {
-	if (channelType == Protocol.FREE)
-	    return ChannelType.FREE;
-	else if (channelType == Protocol.MODERATED)
-	    return ChannelType.MODERATED;
-	return null;
+		if (channelType == Protocol.FREE)
+		    return ChannelType.FREE;
+		else if (channelType == Protocol.MODERATED)
+		    return ChannelType.MODERATED;
+		return null;
     }
+    
+
 
     public List<Channel> getAllChannels() {
-	List<Channel> channelsList = new ArrayList<Channel>();
-	for (int i = 0; i < readInt(); i++) {
-	    channelsList.add(new Channel(readString(), getChannelType(), readString(), readBoolean()));
-	}
-	return channelsList;
+		List<Channel> channelsList = new ArrayList<Channel>();
+		for (int i = 0; i < readInt(); i++) {
+		    channelsList.add(new Channel(readString(), getChannelType(), readString(), readBoolean()));
+		}
+		return channelsList;
     }
 
 }

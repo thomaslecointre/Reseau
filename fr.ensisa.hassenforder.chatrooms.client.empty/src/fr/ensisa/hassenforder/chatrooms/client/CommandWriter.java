@@ -41,7 +41,7 @@ public class CommandWriter extends BasicAbstractWriter {
     }
 
     public void channelSubsctiptionChange(String name, Channel description, boolean selected) {
-	writeInt(Protocol.CREATE);
+	writeInt(Protocol.SUBSCRIBE);
 	writeString(name);
 	writeString(description.getName());
 	writeBoolean(selected);

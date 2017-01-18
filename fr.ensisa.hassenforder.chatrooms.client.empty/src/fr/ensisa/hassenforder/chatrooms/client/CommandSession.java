@@ -7,6 +7,7 @@ import java.util.List;
 import fr.ensisa.hassenforder.chatrooms.client.model.Channel;
 import fr.ensisa.hassenforder.chatrooms.client.model.ChannelType;
 import fr.ensisa.hassenforder.chatrooms.client.model.Message;
+import fr.ensisa.hassenforder.chatrooms.client.model.Model;
 import fr.ensisa.hassenforder.network.Protocol;
 
 public class CommandSession {
