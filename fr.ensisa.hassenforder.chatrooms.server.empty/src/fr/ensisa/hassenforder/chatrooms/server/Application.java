@@ -179,7 +179,9 @@ public class Application implements NetworkListener {
 	    }
 	}
 	for (Map.Entry<User, List<Message>> entry : messages.entrySet()) {
+	    System.out.println("Dispatching...");
 	    entry.getKey().getMessages().dispatchIncomingMessages(entry.getValue());
+	    System.out.println("Dispatched");
 	}
 	model.getIncomingMessages().clear();
     }

@@ -59,6 +59,11 @@ public class CommandReader extends BasicAbstractReader {
 	case Protocol.LOAD:
 	    this.name = readString();
 	    break;
+	case Protocol.NEW_MESSAGE:
+	    this.name = readString();
+	    this.channel = readString();
+	    this.text = readString();
+	    break;
 	// case Protocal.DISCONNECT:
 	// case Protocol.MODERATED: name; text; approved;
 	// ???? case Protocol.FREE: ????

@@ -7,7 +7,6 @@ import java.util.List;
 import fr.ensisa.hassenforder.chatrooms.client.model.Channel;
 import fr.ensisa.hassenforder.chatrooms.client.model.ChannelType;
 import fr.ensisa.hassenforder.chatrooms.client.model.Message;
-import fr.ensisa.hassenforder.chatrooms.client.model.Model;
 import fr.ensisa.hassenforder.network.Protocol;
 
 public class CommandSession {
@@ -85,7 +84,6 @@ public class CommandSession {
 			w.loadAllChannels(name);
 			w.send();
 			r.receive();
-			System.out.println("Number of channels on client = " + r.getAllChannels().size());
 			return (r.getType() == Protocol.LOAD_OK) ? r.getAllChannels() : null;
 		} catch (IOException e) {
 			return null;

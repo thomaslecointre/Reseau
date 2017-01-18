@@ -62,7 +62,6 @@ public class CommandSession extends Thread {
 				return true;
 			case Protocol.LOAD:
 				List<Channel> channels = listener.loadChannels(reader.getName());
-				System.out.println("Number of channels on server = " + channels.size());
 				if (channels != null) {
 					writer.writeInt(Protocol.LOAD_OK);
 					writer.writeInt(channels.size());
@@ -106,7 +105,7 @@ public class CommandSession extends Thread {
 				if (!os.equals(OperationStatus.MESSAGE_SENT)) {
 					writer.writeInt(Protocol.NEW_MESSAGE_KO);
 				} else {
-					// TODO
+					writer.writeInt(Protocol.NEW_MESSAGE);
 				}
 				writer.send();
 				return true;

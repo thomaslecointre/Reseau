@@ -40,9 +40,6 @@ public class MessagesSession {
 		os = listener.connectMessagesUser(reader.getUserName(), this);
 		// Anything else?
 		return true;
-	    case Protocol.NEW_MESSAGE:
-			
-		return true;
 	    default:
 		return false;
 	    }
@@ -52,7 +49,18 @@ public class MessagesSession {
     }
 
     public boolean dispatchIncomingMessages(List<Message> messages) {
+	System.out.println("Dispatching message...");
 	try {
+	    MessagesWriter writer = new MessagesWriter(connection.getOutputStream());
+	    writer.writeInt(Protocol.NEW_MESSAGE);
+	    writer.writeInt(messages.size());
+	    for(Message message : messages) {
+		writer.writeString(message.getAuthor());
+		writer.writeString(message.getChannel().getName());
+		writer.writeString(message.getText());
+		writer.writeInt(message.getId());
+	    }
+	    writer.send();
 	    return true;
 	} catch (Exception e) {
 	}

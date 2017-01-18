@@ -40,7 +40,6 @@ public class CommandReader extends BasicAbstractReader {
 			    break;
 			case Protocol.LOAD_OK:
 			    int size = readInt();
-			    System.out.println("Number of incoming channels = " + size);
 			    channels.clear();
 			    for(int i = 0; i < size; i++) {
 			    	String channelName = readString();
