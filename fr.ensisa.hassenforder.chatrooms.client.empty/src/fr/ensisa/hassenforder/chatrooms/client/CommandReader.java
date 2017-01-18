@@ -1,6 +1,7 @@
 package fr.ensisa.hassenforder.chatrooms.client;
 
 import java.io.InputStream;
+import java.nio.channels.Channels;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +19,7 @@ public class CommandReader extends BasicAbstractReader {
     private boolean subscription;
     private int messageId;
     private boolean approved;
+	private List<Channel> channels = new ArrayList<Channel>();
 
     public CommandReader(InputStream inputStream) {
     	super(inputStream);
@@ -25,6 +27,7 @@ public class CommandReader extends BasicAbstractReader {
 
     public void receive() {
 		type = readInt();
+		
 		switch (type) {
 			case Protocol.CONNECT_OK:
 			    // TODO
@@ -36,28 +39,31 @@ public class CommandReader extends BasicAbstractReader {
 			    // TODO
 			    break;
 			case Protocol.LOAD_OK:
-				/*
 			    int size = readInt();
 			    for(int i =0; i < size; i++){
+			    	channels.clear();
 			    	String channelName = readString();
 			    	int mode = readInt();
 			    	String modoName = readString();
 			    	int subscription = readInt();
 			    	boolean subscriptionBool = (subscription == 0)? true : false; 
 			    	ChannelType modeCT;
-			    	if (mode == 100){
+			    	if (mode == 100) {
 			    		modeCT = ChannelType.FREE;
 			    		Channel channel = new Channel(channelName, modeCT,modoName, subscriptionBool);
-			    	}else if (mode==101){
+			    		channels.add(channel);
+			    	} else if (mode==101) {
 			    		modeCT = ChannelType.MODERATED;
-			    		Channel channel = new Channel(channelName, modeCT,modoName, subscriptionBool);
+			    		Channel channel = new Channel(channelName, modeCT, modoName, subscriptionBool);
+			    		channels.add(channel);
 			    	}
 			    }
-			    */
 			    break;
 			case Protocol.LOAD_KO:
 			    // TODO
+				break;
 			}
+			
     }
 
     public String getName() {
@@ -87,15 +93,15 @@ public class CommandReader extends BasicAbstractReader {
 		    return ChannelType.MODERATED;
 		return null;
     }
-    
-
 
     public List<Channel> getAllChannels() {
-		List<Channel> channelsList = new ArrayList<Channel>();
+    	/*
+		List<Channel> channels = new ArrayList<Channel>();
 		for (int i = 0; i < readInt(); i++) {
-		    channelsList.add(new Channel(readString(), getChannelType(), readString(), readBoolean()));
+		    channels.add(new Channel(readString(), getChannelType(), readString(), readBoolean()));
 		}
-		return channelsList;
+		*/
+		return channels;
     }
 
 }
