@@ -42,7 +42,7 @@ public class CommandSession {
 			CommandReader r = new CommandReader(connection.getInputStream());
 			w.disconnect(name);
 			w.send();
-			r.receive();
+			// r.receive();
 			return true;
 			//return false;
 		} catch (IOException e) {
@@ -85,6 +85,7 @@ public class CommandSession {
 			w.loadAllChannels(name);
 			w.send();
 			r.receive();
+			System.out.println("Number of channels on client = " + r.getAllChannels().size());
 			return (r.getType() == Protocol.LOAD_OK) ? r.getAllChannels() : null;
 		} catch (IOException e) {
 			return null;
