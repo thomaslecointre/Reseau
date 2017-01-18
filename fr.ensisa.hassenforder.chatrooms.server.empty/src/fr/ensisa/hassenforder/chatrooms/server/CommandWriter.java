@@ -14,9 +14,15 @@ public class CommandWriter extends BasicAbstractWriter {
 	protected void writeInt(int v) {
 	    super.writeInt(v);
 	}
+	
 	@Override
 	protected void writeString(String v) {
 		super.writeString(v);
+	}
+	
+	@Override
+	protected void writeBoolean(boolean v) {
+		super.writeBoolean(v);
 	}
 
 	@Override
