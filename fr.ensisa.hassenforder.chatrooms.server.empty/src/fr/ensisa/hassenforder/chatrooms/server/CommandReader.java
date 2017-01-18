@@ -26,6 +26,9 @@ public class CommandReader extends BasicAbstractReader {
 	case Protocol.CONNECT:
 	    this.name = readString();
 	    break;
+	case Protocol.DISCONNECT:
+		this.name = readString();
+		break;
 	case Protocol.CREATE:
 	    this.name = readString();
 	    this.channel = readString();
@@ -34,12 +37,12 @@ public class CommandReader extends BasicAbstractReader {
 	case Protocol.SUBSCRIBE:
 	    this.name = readString();
 	    this.channel = readString();
-	    this.subscription = true;
+	    this.subscription = readBoolean();
 	    break;
 	case Protocol.UNSUBSCRIBE:
 	    this.name = readString();
 	    this.channel = readString();
-	    this.subscription = false;
+	    this.subscription = readBoolean();
 	    break;
 	case Protocol.VALIDATE:
 	    this.channel = readString();

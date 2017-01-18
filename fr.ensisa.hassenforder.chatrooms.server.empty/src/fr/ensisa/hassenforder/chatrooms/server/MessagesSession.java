@@ -41,7 +41,7 @@ public class MessagesSession {
 		// Anything else?
 		return true;
 	    case Protocol.NEW_MESSAGE:
-		// TODO
+			
 		return true;
 	    default:
 		return false;

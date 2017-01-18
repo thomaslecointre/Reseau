@@ -40,13 +40,13 @@ public class CommandReader extends BasicAbstractReader {
 			    break;
 			case Protocol.LOAD_OK:
 			    int size = readInt();
-			    for(int i =0; i < size; i++){
-			    	channels.clear();
+			    System.out.println("Number of incoming channels = " + size);
+			    channels.clear();
+			    for(int i = 0; i < size; i++) {
 			    	String channelName = readString();
 			    	int mode = readInt();
 			    	String modoName = readString();
-			    	int subscription = readInt();
-			    	boolean subscriptionBool = (subscription == 0)? true : false; 
+			    	boolean subscriptionBool = readBoolean();
 			    	ChannelType modeCT;
 			    	if (mode == 100) {
 			    		modeCT = ChannelType.FREE;

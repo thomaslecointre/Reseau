@@ -48,6 +48,9 @@ public class CommandSession extends Thread {
 				}
 				writer.send();
 				return true;
+			case Protocol.DISCONNECT:
+				os = listener.disconnectUser(reader.getName());
+				return true;
 			case Protocol.CREATE:
 				os = listener.createChannel(reader.getName(), reader.getChannel(), reader.getChannelType());
 				if (!os.equals(OperationStatus.CHANNEL_CREATED)) {
@@ -59,14 +62,14 @@ public class CommandSession extends Thread {
 				return true;
 			case Protocol.LOAD:
 				List<Channel> channels = listener.loadChannels(reader.getName());
+				System.out.println("Number of channels on server = " + channels.size());
 				if (channels != null) {
 					writer.writeInt(Protocol.LOAD_OK);
 					writer.writeInt(channels.size());
 					for (Channel channel : channels) {
 						writer.writeString(channel.getName());
 						writer.writeInt(channel.getChannelTypeInt());
-						if(channel.getModerator() == null)
-						{
+						if (channel.getModerator() == null) {
 							writer.writeString("No Moderator");
 						} else {
 							writer.writeString(channel.getModerator().getName());
