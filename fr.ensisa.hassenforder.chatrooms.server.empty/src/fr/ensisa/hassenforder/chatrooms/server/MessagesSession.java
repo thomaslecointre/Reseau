@@ -31,7 +31,6 @@ public class MessagesSession {
 
     public boolean processConnection() {
 	try {
-	    MessagesWriter writer = new MessagesWriter(connection.getOutputStream());
 	    MessagesReader reader = new MessagesReader(connection.getInputStream());
 	    reader.receive();
 	    OperationStatus os;
