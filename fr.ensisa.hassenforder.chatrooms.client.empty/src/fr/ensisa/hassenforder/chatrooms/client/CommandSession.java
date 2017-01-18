@@ -112,7 +112,7 @@ public class CommandSession {
 			w.createModerationState(name, message, approved);
 			w.send();
 			r.receive();
-			return (r.getType() == Protocol.FREE) ? true : false;
+			return (r.getType() == Protocol.NEW_MESSAGE) ? true : false;
 			
 		} catch (IOException e) {
 			return false;

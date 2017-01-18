@@ -48,7 +48,7 @@ public class CommandWriter extends BasicAbstractWriter {
     }
 
     public void createModerationState(String name, Message message, boolean approved) {
-	writeInt(Protocol.CREATE);
+	writeInt(Protocol.VALIDATE);
 	writeString(name);
 	writeString(message.getText());
 	writeBoolean(approved);
