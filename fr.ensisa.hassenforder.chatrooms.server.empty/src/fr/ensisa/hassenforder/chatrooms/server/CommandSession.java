@@ -65,12 +65,18 @@ public class CommandSession extends Thread {
 					for (Channel channel : channels) {
 						writer.writeString(channel.getName());
 						writer.writeInt(channel.getChannelTypeInt());
-						writer.writeString(channel.getModerator().getName());
+						if(channel.getModerator() == null)
+						{
+							writer.writeString("No Moderator");
+						} else {
+							writer.writeString(channel.getModerator().getName());
+						}
 						writer.writeBoolean(channel.isSubscriptor(reader.getName()));
 					}
 				} else {
 					writer.writeInt(Protocol.LOAD_KO);
 				}
+				writer.send();
 				return true;
 			case Protocol.SUBSCRIBE:
 				os = listener.ChangeChannelSubscription(reader.getName(), reader.getChannel(),
