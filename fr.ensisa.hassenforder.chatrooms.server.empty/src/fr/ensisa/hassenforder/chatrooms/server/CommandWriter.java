@@ -10,4 +10,24 @@ public class CommandWriter extends BasicAbstractWriter {
 		super (outputStream);
 	}
 
+	@Override
+	protected void writeInt(int v) {
+	    super.writeInt(v);
+	}
+	
+	@Override
+	protected void writeString(String v) {
+		super.writeString(v);
+	}
+	
+	@Override
+	protected void writeBoolean(boolean v) {
+		super.writeBoolean(v);
+	}
+
+	@Override
+	public void send() {
+	    super.send();
+	}
+
 }
