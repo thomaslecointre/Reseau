@@ -36,6 +36,8 @@ public interface Protocol {
     public static final int INVALIDATE_OK 		= 53;
     public static final int INVALIDATE_KO 		= 54;
     
+    public static final int PENDING_MESSAGE		= 60;
+    
     // Channel type integers
     public static final int FREE		      	= 100;
     public static final int MODERATED			= 101;

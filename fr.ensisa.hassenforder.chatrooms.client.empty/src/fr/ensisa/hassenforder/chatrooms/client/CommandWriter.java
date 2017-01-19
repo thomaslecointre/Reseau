@@ -48,10 +48,12 @@ public class CommandWriter extends BasicAbstractWriter {
     }
 
     public void createModerationState(String name, Message message, boolean approved) {
-	writeInt(Protocol.VALIDATE);
+	if(approved)
+	    writeInt(Protocol.VALIDATE);
+	else
+	    writeInt(Protocol.INVALIDATE);
 	writeString(name);
-	writeString(message.getText());
-	writeBoolean(approved);
+	writeInt(message.getId());
     }
 
     public void createMessage(String name, String channelName, String text) {

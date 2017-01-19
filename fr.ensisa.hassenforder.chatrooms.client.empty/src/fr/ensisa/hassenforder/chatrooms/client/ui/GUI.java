@@ -382,6 +382,7 @@ public class GUI extends javax.swing.JFrame implements ModelListener {
 	    if (evt.getKeyChar() == '\n') {
 		final String channelName = jChannelUsed.getSelectedItem().toString();
 		final String text = jMessage.getText();
+		jMessage.setText("");
 		new Thread() {
 		    public void run() {
 			listener.notifySendMessage(channelName, text);

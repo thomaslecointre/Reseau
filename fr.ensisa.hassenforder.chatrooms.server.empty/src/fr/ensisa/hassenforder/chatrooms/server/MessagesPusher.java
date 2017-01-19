@@ -18,7 +18,7 @@ public class MessagesPusher extends Thread {
 		    listener.processIncomingMessages();
 		else
 		    listener.processPendingMessages();
-		Thread.sleep(1000);
+		Thread.sleep(5000);
 		++count;
 	    }
 	} catch (Exception e) {

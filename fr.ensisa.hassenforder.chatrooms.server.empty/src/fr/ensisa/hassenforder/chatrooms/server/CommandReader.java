@@ -45,13 +45,11 @@ public class CommandReader extends BasicAbstractReader {
 	    this.subscription = readBoolean();
 	    break;
 	case Protocol.VALIDATE:
-	    this.channel = readString();
 	    this.name = readString();
 	    this.messageId = readInt();
 	    this.approved = true;
 	    break;
 	case Protocol.INVALIDATE:
-	    this.channel = readString();
 	    this.name = readString();
 	    this.messageId = readInt();
 	    this.approved = false;

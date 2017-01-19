@@ -48,7 +48,6 @@ public class MessagesSession {
     }
 
     public boolean dispatchIncomingMessages(List<Message> messages) {
-	System.out.println("Dispatching message...");
 	try {
 	    MessagesWriter writer = new MessagesWriter(connection.getOutputStream());
 	    writer.writeInt(Protocol.NEW_MESSAGE);
@@ -68,6 +67,17 @@ public class MessagesSession {
 
     public boolean dispatchPendingMessages(List<Message> messages) {
 	try {
+	    MessagesWriter writer = new MessagesWriter(connection.getOutputStream());
+	    writer.writeInt(Protocol.PENDING_MESSAGE);
+	    writer.writeInt(messages.size());
+	    for(Message message : messages) {
+		writer.writeString(message.getChannel().getModerator().getName());
+		writer.writeString(message.getAuthor());
+		writer.writeString(message.getChannel().getName());
+		writer.writeString(message.getText());
+		writer.writeInt(message.getId());
+	    }
+	    writer.send();
 	    return true;
 	} catch (Exception e) {
 	}
