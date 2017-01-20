@@ -19,6 +19,7 @@ public class CommandReader extends BasicAbstractReader {
     private boolean subscription;
     private int messageId;
     private boolean approved;
+    private String errorMessage = "";
 	private List<Channel> channels = new ArrayList<Channel>();
 
     public CommandReader(InputStream inputStream) {
@@ -30,9 +31,6 @@ public class CommandReader extends BasicAbstractReader {
 		
 		switch (type) {
 			case Protocol.CONNECT_OK:
-			    // TODO
-			    break;
-			case Protocol.CONNECT_KO:
 			    // TODO
 			    break;
 			case Protocol.CREATE_OK:
@@ -58,8 +56,29 @@ public class CommandReader extends BasicAbstractReader {
 			    	}
 			    }
 			    break;
+			case Protocol.CONNECT_KO:
+			    errorMessage = readString(); 
+				break;
+			case Protocol.CREATE_KO:
+				errorMessage = readString();
+				break;
 			case Protocol.LOAD_KO:
-			    // TODO
+				errorMessage = readString();
+				break;
+			case Protocol.SUBSCRIBE_KO:
+				errorMessage = readString();
+				break;
+			case Protocol.UNSUBSCRIBE_KO:
+				errorMessage = readString();
+				break;
+			case Protocol.NEW_MESSAGE_KO:
+				errorMessage = readString();
+				break;
+			case Protocol.VALIDATE_KO:
+				errorMessage = readString();
+				break;
+			case Protocol.INVALIDATE_KO:
+				errorMessage = readString();
 				break;
 			}
 			
@@ -83,6 +102,10 @@ public class CommandReader extends BasicAbstractReader {
 
     public boolean getApproved() {
     	return this.approved;
+    }
+    
+    public String getErrorMessage() {
+    	return this.errorMessage;
     }
 
     public ChannelType getChannelType() {

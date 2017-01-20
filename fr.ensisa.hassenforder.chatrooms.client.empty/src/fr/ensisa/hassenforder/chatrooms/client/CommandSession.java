@@ -12,6 +12,7 @@ import fr.ensisa.hassenforder.network.Protocol;
 public class CommandSession {
 
     private Socket connection;
+    private String errorMessage = "";
 
     public CommandSession() {
     }
@@ -58,6 +59,7 @@ public class CommandSession {
 	    w.createConnect(name);
 	    w.send();
 	    r.receive();
+	    this.errorMessage = r.getErrorMessage();
 	    return (r.getType() == Protocol.CONNECT_OK) ? true : false;
 	} catch (IOException e) {
 	    return false;
@@ -71,6 +73,7 @@ public class CommandSession {
 	    w.channelCreation(name, channel, type);
 	    w.send();
 	    r.receive();
+	    this.errorMessage = r.getErrorMessage();
 	    return (r.getType() == Protocol.CREATE_OK) ? true : false;
 
 	} catch (IOException e) {
@@ -85,6 +88,7 @@ public class CommandSession {
 	    w.loadAllChannels(name);
 	    w.send();
 	    r.receive();
+	    this.errorMessage = r.getErrorMessage();
 	    return (r.getType() == Protocol.LOAD_OK) ? r.getAllChannels() : null;
 	} catch (IOException e) {
 	    return null;
@@ -98,6 +102,7 @@ public class CommandSession {
 	    w.channelSubsctiptionChange(name, description, selected);
 	    w.send();
 	    r.receive();
+	    this.errorMessage = r.getErrorMessage();
 	    return (r.getType() == Protocol.SUBSCRIBE_OK) ? true : false;
 
 	} catch (IOException e) {
@@ -112,6 +117,7 @@ public class CommandSession {
 	    w.createModerationState(name, message, approved);
 	    w.send();
 	    // r.receive();
+	    // this.errorMessage = r.getErrorMessage();
 	    // return (r.getType() == Protocol.VALIDATE_KO || r.getType() == Protocol.INVALIDATE_KO) ? false : true;
 	    return true;
 	} catch (IOException e) {
@@ -126,11 +132,16 @@ public class CommandSession {
 	    w.createMessage(name, channelName, text);
 	    w.send();
 	    r.receive();
+	    this.errorMessage = r.getErrorMessage();
 	    return (r.getType() == Protocol.NEW_MESSAGE) ? true : false;
 
 	} catch (IOException e) {
 	    return false;
 	}
+    }
+    
+    public String getErrorMessage(){
+    	return this.errorMessage;
     }
 
 }
