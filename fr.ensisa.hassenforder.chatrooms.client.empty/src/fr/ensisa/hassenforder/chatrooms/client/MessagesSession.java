@@ -66,8 +66,10 @@ public class MessagesSession extends Thread {
     public void run() {
 	try {
 	    MessagesWriter w = new MessagesWriter(connection.getOutputStream());
+	    MessagesReader r = new MessagesReader(connection.getInputStream());
 	    w.createConnect(name);
 	    w.send();
+	    r.receive();
 	} catch (IOException e) {
 	}
 	while (true) {

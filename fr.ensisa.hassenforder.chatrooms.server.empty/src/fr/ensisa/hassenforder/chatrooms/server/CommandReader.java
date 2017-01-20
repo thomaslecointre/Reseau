@@ -8,91 +8,88 @@ import fr.ensisa.hassenforder.network.Protocol;
 
 public class CommandReader extends BasicAbstractReader {
 
-    private String name;
-    private String channel;
-    private int channelType;
-    private boolean subscription;
-    private int messageId;
-    private boolean approved;
-    private String text;
+	private String name;
+	private String channel;
+	private int channelType;
+	private boolean subscription;
+	private int messageId;
+	private boolean approved;
+	private String text;
 
-    public CommandReader(InputStream inputStream) {
-	super(inputStream);
-    }
-
-    public void receive() {
-	type = readInt();
-	switch (type) {
-	case Protocol.CONNECT:
-	    this.name = readString();
-	    break;
-	case Protocol.DISCONNECT:
-		this.name = readString();
-		break;
-	case Protocol.CREATE:
-	    this.name = readString();
-	    this.channel = readString();
-	    this.channelType = readInt();
-	    break;
-	case Protocol.SUBSCRIBE:
-	    this.name = readString();
-	    this.channel = readString();
-	    this.subscription = readBoolean();
-	    break;
-	case Protocol.UNSUBSCRIBE:
-	    this.name = readString();
-	    this.channel = readString();
-	    this.subscription = readBoolean();
-	    break;
-	case Protocol.VALIDATE:
-	    this.name = readString();
-	    this.messageId = readInt();
-	    this.approved = true;
-	    break;
-	case Protocol.INVALIDATE:
-	    this.name = readString();
-	    this.messageId = readInt();
-	    this.approved = false;
-	    break;
-	case Protocol.LOAD:
-	    this.name = readString();
-	    break;
-	case Protocol.NEW_MESSAGE:
-	    this.name = readString();
-	    this.channel = readString();
-	    this.text = readString();
-	    break;
-	// case Protocal.DISCONNECT:
-	// case Protocol.MODERATED: name; text; approved;
-	// ???? case Protocol.FREE: ????
+	public CommandReader(InputStream inputStream) {
+		super(inputStream);
 	}
-    }
 
-    public String getName() {
-	return this.name;
-    }
+	public void receive() {
+		type = readInt();
+		switch (type) {
+		case Protocol.CONNECT:
+			this.name = readString();
+			break;
+		case Protocol.DISCONNECT:
+			this.name = readString();
+			break;
+		case Protocol.CREATE:
+			this.name = readString();
+			this.channel = readString();
+			this.channelType = readInt();
+			break;
+		case Protocol.SUBSCRIBE:
+			this.name = readString();
+			this.channel = readString();
+			this.subscription = readBoolean();
+			break;
+		case Protocol.UNSUBSCRIBE:
+			this.name = readString();
+			this.channel = readString();
+			this.subscription = readBoolean();
+			break;
+		case Protocol.VALIDATE:
+			this.name = readString();
+			this.messageId = readInt();
+			this.approved = true;
+			break;
+		case Protocol.INVALIDATE:
+			this.name = readString();
+			this.messageId = readInt();
+			this.approved = false;
+			break;
+		case Protocol.LOAD:
+			this.name = readString();
+			break;
+		case Protocol.NEW_MESSAGE:
+			this.name = readString();
+			this.channel = readString();
+			this.text = readString();
+			break;
+		}
+	}
 
-    public String getChannel() {
-	return this.channel;
-    }
+	public String getName() {
+		return this.name;
+	}
 
-    public ChannelType getChannelType() {
-	return channelType == Protocol.FREE ? ChannelType.FREE : ChannelType.MODERATED;
-    }
+	public String getChannel() {
+		return this.channel;
+	}
 
-    public boolean getSubscription() {
-	return this.subscription;
-    }
+	public ChannelType getChannelType() {
+		return channelType == Protocol.FREE ? ChannelType.FREE : ChannelType.MODERATED;
+	}
 
-    public int getMessageId() {
-	return this.messageId;
-    }
+	public boolean getSubscription() {
+		return this.subscription;
+	}
 
-    public boolean getApproved() {
-	return this.approved;
-    }
+	public int getMessageId() {
+		return this.messageId;
+	}
 
-    public String getText() {
-	return this.text;
-    }
+	public boolean getApproved() {
+		return this.approved;
+	}
+
+	public String getText() {
+		return this.text;
+	}
 }
