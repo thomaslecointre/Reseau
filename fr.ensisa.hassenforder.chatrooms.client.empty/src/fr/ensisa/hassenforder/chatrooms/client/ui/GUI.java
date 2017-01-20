@@ -116,7 +116,7 @@ public class GUI extends javax.swing.JFrame implements ModelListener {
 	SwingUtilities.invokeLater(new Runnable() {
 	    @Override
 	    public void run() {
-		jMessage.setText("message_" + count);
+		// jMessage.setText("message_" + count);
 		++count;
 		updateStatus(status);
 	    }
@@ -221,7 +221,6 @@ public class GUI extends javax.swing.JFrame implements ModelListener {
 	jMessages.setLayout(new javax.swing.BoxLayout(jMessages, javax.swing.BoxLayout.Y_AXIS));
 	jScrollPane3.setViewportView(jMessages);
 
-	jMessage.setText("messageText");
 	jMessage.addKeyListener(new java.awt.event.KeyAdapter() {
 	    public void keyTyped(java.awt.event.KeyEvent evt) {
 		jMessageKeyTyped(evt);
@@ -229,7 +228,7 @@ public class GUI extends javax.swing.JFrame implements ModelListener {
 	});
 
 	jChannelUsed.setModel(
-		new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+		new javax.swing.DefaultComboBoxModel<>(new String[] {}));
 
 	jStatus.setText("status");
 

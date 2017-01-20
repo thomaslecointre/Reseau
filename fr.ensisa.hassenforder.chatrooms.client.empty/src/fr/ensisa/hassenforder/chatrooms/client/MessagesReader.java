@@ -42,7 +42,7 @@ public class MessagesReader extends BasicAbstractReader {
 				channelName = readString();
 				text = readString();
 				messageId = readInt();
-				Message message = new Message(channelName, messageId, text, name);
+				Message message = new Message(channelName, messageId, name, text);
 				messages.add(message);
 			}
 			break;
@@ -57,7 +57,7 @@ public class MessagesReader extends BasicAbstractReader {
 				channelName = readString();
 				text = readString();
 				messageId = readInt();
-				Message message = new Message(channelName, messageId, text, name);
+				Message message = new Message(channelName, messageId, name, text);
 				moderations.put(message, moderatorName);
 			}
 			break;

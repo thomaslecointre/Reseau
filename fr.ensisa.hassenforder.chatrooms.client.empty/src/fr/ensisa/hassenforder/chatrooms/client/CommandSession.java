@@ -43,9 +43,7 @@ public class CommandSession {
 	    CommandReader r = new CommandReader(connection.getInputStream());
 	    w.disconnect(name);
 	    w.send();
-	    // r.receive();
 	    return true;
-	    // return false;
 	} catch (IOException e) {
 	    return false;
 	}
@@ -113,13 +111,12 @@ public class CommandSession {
     public boolean createModerationState(String name, Message message, boolean approved) {
 	try {
 	    CommandWriter w = new CommandWriter(connection.getOutputStream());
-	    // CommandReader r = new CommandReader(connection.getInputStream());
+	    CommandReader r = new CommandReader(connection.getInputStream());
 	    w.createModerationState(name, message, approved);
 	    w.send();
-	    // r.receive();
-	    // this.errorMessage = r.getErrorMessage();
-	    // return (r.getType() == Protocol.VALIDATE_KO || r.getType() == Protocol.INVALIDATE_KO) ? false : true;
-	    return true;
+	    r.receive();
+	    this.errorMessage = r.getErrorMessage();
+	    return (r.getType() == Protocol.VALIDATE_KO || r.getType() == Protocol.INVALIDATE_KO) ? false : true;
 	} catch (IOException e) {
 	    return false;
 	}

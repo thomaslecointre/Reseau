@@ -57,7 +57,7 @@ public class Application implements GUIListener, NetworkListener
 			else
 			{
 				command = null;
-				gui.updateConnection(model, name + " is not allowed : ");
+				gui.updateConnection(model, name + " is not allowed");
 			}
 		}
 	}

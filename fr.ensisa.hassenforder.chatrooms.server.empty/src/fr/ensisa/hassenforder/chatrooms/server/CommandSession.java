@@ -65,6 +65,8 @@ public class CommandSession extends Thread {
 						writer.writeString("User is not connected.");
 					if(os.equals(OperationStatus.CHANNEL_CREATION_FAILED))
 						writer.writeString("Server failed to create channel.");
+					if(os.equals(OperationStatus.CHANNEL_EXISTS))
+						writer.writeString("Channel already exists on the server.");
 				} else {
 					writer.writeInt(Protocol.CREATE_OK);
 				}
